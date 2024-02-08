@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://qk5jhqbcod"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_qk6uv"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ho5ud"]
+size = Vector2(10, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_beo28"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g8n3v"]
+radius = 0.3
+height = 1.5
+
+[node name="Main" type="Node3D"]
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ho5ud")
+
+[node name="ComparisonCube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_beo28")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(-0.861877, 0, -0.507117, 0, 1, 0, 0.507117, 0, -0.861877, 1, 1.04667, 2.91607)
+script = ExtResource("1_qk6uv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+mesh = SubResource("CapsuleMesh_g8n3v")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(-1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, -1, 0, 0.268446, 0)
+current = true
