@@ -1,17 +1,50 @@
-[gd_scene load_steps=5 format=3 uid="uid://qk5jhqbcod"]
+[gd_scene load_steps=18 format=3 uid="uid://qk5jhqbcod"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_qk6uv"]
+[ext_resource type="PackedScene" uid="uid://bh20snvpxxyhh" path="res://GLTF format/stallRed.glb" id="2_whujg"]
+[ext_resource type="PackedScene" uid="uid://0du1jm6aqfoo" path="res://GLTF format/apple.glb" id="3_yqpju"]
+[ext_resource type="PackedScene" uid="uid://cwt064pr4a7ra" path="res://GLTF format/advancedCharacter.gltf" id="5_264hx"]
+[ext_resource type="Texture2D" uid="uid://2aa4lo7sx1o4" path="res://GLTF format/skin_adventurer.png" id="6_v5phi"]
+[ext_resource type="Script" path="res://dialogue_manager.gd" id="7_amprb"]
+[ext_resource type="FontFile" uid="uid://r51mowhp8n5q" path="res://GLTF format/PoetsenOne-Regular.ttf" id="8_4ji4q"]
+[ext_resource type="Resource" uid="uid://cdq1mscaymiqs" path="res://Dialogue/intro.tres" id="8_f1flr"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bw3md"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_5qtb2"]
+sky_material = SubResource("ProceduralSkyMaterial_bw3md")
+
+[sub_resource type="Environment" id="Environment_mcxp7"]
+background_mode = 2
+sky = SubResource("Sky_5qtb2")
+tonemap_mode = 2
+glow_enabled = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ho5ud"]
 size = Vector2(10, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_beo28"]
 
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_r6tx6"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lg1eo"]
+radius = 0.3
+height = 1.5
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g8n3v"]
 radius = 0.3
 height = 1.5
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aab3h"]
+albedo_texture = ExtResource("6_v5phi")
+
 [node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mcxp7")
 
 [node name="Ground" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_ho5ud")
@@ -20,16 +53,121 @@ mesh = SubResource("PlaneMesh_ho5ud")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_beo28")
 
-[node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(-0.861877, 0, -0.507117, 0, 1, 0, 0.507117, 0, -0.861877, 1, 1.04667, 2.91607)
+[node name="StaticBody3D" type="StaticBody3D" parent="ComparisonCube"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ComparisonCube/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_r6tx6")
+
+[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.2, 1.04667, 2.91607)
 script = ExtResource("1_qk6uv")
+camera = NodePath("Camera3D")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, -0.2, 0)
+shape = SubResource("CapsuleShape3D_lg1eo")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 mesh = SubResource("CapsuleMesh_g8n3v")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(-1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, -1, 0, 0.268446, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.235633, 0)
 current = true
+
+[node name="Crosshair" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AdventurerNPC" parent="." instance=ExtResource("5_264hx")]
+transform = Transform3D(0.819152, 0, 0.573577, 0, 1, 0, -0.573577, 0, 0.819152, -0.933684, 0, 0.807224)
+
+[node name="Body1" parent="AdventurerNPC" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_aab3h")
+
+[node name="Head1" parent="AdventurerNPC" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_aab3h")
+
+[node name="ArmLeft1" parent="AdventurerNPC" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_aab3h")
+
+[node name="ArmRight1" parent="AdventurerNPC" index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_aab3h")
+
+[node name="LegLeft1" parent="AdventurerNPC" index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_aab3h")
+
+[node name="LegRight1" parent="AdventurerNPC" index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_aab3h")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-3.82294e-08, -0.484871, 0.874586, -2.11944e-08, 0.874586, 0.484871, -1, -1.77636e-15, -4.37114e-08, 4.64417, 3.19987, 0.0122285)
+shadow_enabled = true
+
+[node name="DialogUI" type="Control" parent="." node_paths=PackedStringArray("_dialog_text", "_avatar")]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+script = ExtResource("7_amprb")
+_dialog_text = NodePath("TextBG/DialogueText")
+_avatar = NodePath("Avatar")
+_current_dialogue_tres = ExtResource("8_f1flr")
+
+[node name="Avatar" type="TextureRect" parent="DialogUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -128.0
+offset_right = 128.0
+grow_vertical = 0
+expand_mode = 1
+
+[node name="TextBG" type="ColorRect" parent="DialogUI"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = -85.0
+offset_right = 828.0
+color = Color(0.901961, 0.901961, 0.901961, 1)
+
+[node name="DialogueText" type="Label" parent="DialogUI/TextBG"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = -15.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_4ji4q")
+theme_override_font_sizes/font_size = 20
+text = "Sample Textdadasdasdadadadadadadadaadadada"
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+max_lines_visible = 2
+
+[node name="FoodQuiz" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.01594, 0, 2.94622)
+
+[node name="stallRed" parent="FoodQuiz" instance=ExtResource("2_whujg")]
+
+[node name="apple2" parent="FoodQuiz" instance=ExtResource("3_yqpju")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.409574, 0.8224, 0.243247)
+
+[editable path="AdventurerNPC"]

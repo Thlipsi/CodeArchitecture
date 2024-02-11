@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=3 format=3 uid="uid://cdq1mscaymiqs"]
+
+[ext_resource type="Script" path="res://dialogue.gd" id="1_f70lw"]
+[ext_resource type="Texture2D" uid="uid://vks2w32uaikx" path="res://GLTF format/face_robot.png" id="1_jxfyn"]
+
+[resource]
+script = ExtResource("1_f70lw")
+avatar_texture = ExtResource("1_jxfyn")
+dialog_slides = Array[String](["Welcome to the bazaar!", "I hope you came hungry, because there's a lot of free food!", "Just make sure to use the right food!", "Ha ha ha ha ha"])
