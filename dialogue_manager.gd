@@ -9,6 +9,8 @@ var _current_slide_index := 0
 func _ready():
 	_avatar.texture = _current_dialogue_tres.avatar_texture
 	show_slide()
+	
+	GameEvents.connect("dialog_initiated", _on_dialog_initiated)
 
 
 func _input(event):
@@ -21,4 +23,11 @@ func _input(event):
 
 func show_slide():
 	_dialog_text.text = _current_dialogue_tres.dialog_slides[_current_slide_index]
+	
 
+func _on_dialog_initiated(_dialogue: Dialogue):
+	_current_dialogue_tres = _dialogue
+	_current_slide_index = 0
+	_avatar.texture = _current_dialogue_tres.avatar_texture
+	show_slide()
+	self.visible = true

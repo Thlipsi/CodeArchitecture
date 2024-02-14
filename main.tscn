@@ -1,13 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://qk5jhqbcod"]
+[gd_scene load_steps=21 format=3 uid="uid://qk5jhqbcod"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_qk6uv"]
-[ext_resource type="PackedScene" uid="uid://bh20snvpxxyhh" path="res://GLTF format/stallRed.glb" id="2_whujg"]
-[ext_resource type="PackedScene" uid="uid://0du1jm6aqfoo" path="res://GLTF format/apple.glb" id="3_yqpju"]
-[ext_resource type="PackedScene" uid="uid://cwt064pr4a7ra" path="res://GLTF format/advancedCharacter.gltf" id="5_264hx"]
-[ext_resource type="Texture2D" uid="uid://2aa4lo7sx1o4" path="res://GLTF format/skin_adventurer.png" id="6_v5phi"]
+[ext_resource type="Script" path="res://food_chooser_ray.gd" id="2_ai30i"]
+[ext_resource type="PackedScene" uid="uid://0du1jm6aqfoo" path="res://Assets/apple.glb" id="3_yqpju"]
+[ext_resource type="PackedScene" uid="uid://j108u7gyo1d5" path="res://food_quiz.tscn" id="5_sh3hx"]
+[ext_resource type="Resource" uid="uid://byj22ltpj5hpf" path="res://Dialogue/fruit_chat.tres" id="6_dad17"]
+[ext_resource type="Texture2D" uid="uid://2aa4lo7sx1o4" path="res://Assets/skin_adventurer.png" id="6_v5phi"]
 [ext_resource type="Script" path="res://dialogue_manager.gd" id="7_amprb"]
-[ext_resource type="FontFile" uid="uid://r51mowhp8n5q" path="res://GLTF format/PoetsenOne-Regular.ttf" id="8_4ji4q"]
+[ext_resource type="PackedScene" uid="uid://bmjff20pawrhj" path="res://Assets/grapes.glb" id="8_2d4ua"]
+[ext_resource type="FontFile" uid="uid://r51mowhp8n5q" path="res://Assets/PoetsenOne-Regular.ttf" id="8_4ji4q"]
 [ext_resource type="Resource" uid="uid://cdq1mscaymiqs" path="res://Dialogue/intro.tres" id="8_f1flr"]
+[ext_resource type="PackedScene" uid="uid://bbums76ylii11" path="res://Assets/orange.glb" id="10_caqwd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bw3md"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -38,7 +41,7 @@ height = 1.5
 radius = 0.3
 height = 1.5
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aab3h"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40rmb"]
 albedo_texture = ExtResource("6_v5phi")
 
 [node name="Main" type="Node3D"]
@@ -59,7 +62,7 @@ mesh = SubResource("BoxMesh_beo28")
 shape = SubResource("ConcavePolygonShape3D_r6tx6")
 
 [node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.2, 1.04667, 2.91607)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.32974, 1.04667, 2.91607)
 script = ExtResource("1_qk6uv")
 camera = NodePath("Camera3D")
 metadata/_edit_group_ = true
@@ -76,6 +79,12 @@ mesh = SubResource("CapsuleMesh_g8n3v")
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.235633, 0)
 current = true
 
+[node name="FoodChooserRay" type="RayCast3D" parent="Player/Camera3D"]
+target_position = Vector3(0, 0, -2.5)
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("2_ai30i")
+
 [node name="Crosshair" type="ColorRect" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -88,27 +97,6 @@ offset_right = 5.0
 offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="AdventurerNPC" parent="." instance=ExtResource("5_264hx")]
-transform = Transform3D(0.819152, 0, 0.573577, 0, 1, 0, -0.573577, 0, 0.819152, -0.933684, 0, 0.807224)
-
-[node name="Body1" parent="AdventurerNPC" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_aab3h")
-
-[node name="Head1" parent="AdventurerNPC" index="1"]
-surface_material_override/0 = SubResource("StandardMaterial3D_aab3h")
-
-[node name="ArmLeft1" parent="AdventurerNPC" index="2"]
-surface_material_override/0 = SubResource("StandardMaterial3D_aab3h")
-
-[node name="ArmRight1" parent="AdventurerNPC" index="3"]
-surface_material_override/0 = SubResource("StandardMaterial3D_aab3h")
-
-[node name="LegLeft1" parent="AdventurerNPC" index="4"]
-surface_material_override/0 = SubResource("StandardMaterial3D_aab3h")
-
-[node name="LegRight1" parent="AdventurerNPC" index="5"]
-surface_material_override/0 = SubResource("StandardMaterial3D_aab3h")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-3.82294e-08, -0.484871, 0.874586, -2.11944e-08, 0.874586, 0.484871, -1, -1.77636e-15, -4.37114e-08, 4.64417, 3.19987, 0.0122285)
@@ -162,12 +150,35 @@ autowrap_mode = 2
 clip_text = true
 max_lines_visible = 2
 
-[node name="FoodQuiz" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.01594, 0, 2.94622)
+[node name="FoodQuiz" parent="." instance=ExtResource("5_sh3hx")]
+_dialogue = ExtResource("6_dad17")
 
-[node name="stallRed" parent="FoodQuiz" instance=ExtResource("2_whujg")]
+[node name="Body1" parent="FoodQuiz/AdventurerNPC" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_40rmb")
 
-[node name="apple2" parent="FoodQuiz" instance=ExtResource("3_yqpju")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.409574, 0.8224, 0.243247)
+[node name="Head1" parent="FoodQuiz/AdventurerNPC" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_40rmb")
 
-[editable path="AdventurerNPC"]
+[node name="ArmLeft1" parent="FoodQuiz/AdventurerNPC" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_40rmb")
+
+[node name="ArmRight1" parent="FoodQuiz/AdventurerNPC" index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_40rmb")
+
+[node name="LegLeft1" parent="FoodQuiz/AdventurerNPC" index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_40rmb")
+
+[node name="LegRight1" parent="FoodQuiz/AdventurerNPC" index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_40rmb")
+
+[node name="grapes" parent="FoodQuiz/Food" index="2" instance=ExtResource("8_2d4ua")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.183997, 0)
+
+[node name="apple" parent="FoodQuiz/Food2" index="2" instance=ExtResource("3_yqpju")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0775442, 0)
+
+[node name="orange" parent="FoodQuiz/Food3" index="2" instance=ExtResource("10_caqwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0648785, 0)
+
+[editable path="FoodQuiz"]
+[editable path="FoodQuiz/AdventurerNPC"]
