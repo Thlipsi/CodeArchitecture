@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=3 format=3 uid="uid://buv7w8bu3thel"]
+
+[ext_resource type="Texture2D" uid="uid://b6lxavny6ii0" path="res://Assets/face_adventurer.png" id="1_0kqah"]
+[ext_resource type="Script" path="res://dialogue.gd" id="1_un3yf"]
+
+[resource]
+script = ExtResource("1_un3yf")
+avatar_texture = ExtResource("1_0kqah")
+dialog_slides = Array[String](["You fool!", "What? Oh, nothing..."])

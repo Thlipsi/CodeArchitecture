@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=3 format=3 uid="uid://dm63yyffpc3l0"]
+
+[ext_resource type="Texture2D" uid="uid://pq51tldrth84" path="res://Assets/face_woman.png" id="1_8wgut"]
+[ext_resource type="Script" path="res://dialogue.gd" id="2_mvn7b"]
+
+[resource]
+script = ExtResource("2_mvn7b")
+avatar_texture = ExtResource("1_8wgut")
+dialog_slides = Array[String](["Do nut you're dead?", "There was rat poison in that one...", "Well anyways thanks for trying..."])

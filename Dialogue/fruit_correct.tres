@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=3 format=3 uid="uid://t511qrd57h5n"]
+
+[ext_resource type="Script" path="res://dialogue.gd" id="1_ghc4x"]
+[ext_resource type="Texture2D" uid="uid://b6lxavny6ii0" path="res://Assets/face_adventurer.png" id="1_xlp5w"]
+
+[resource]
+script = ExtResource("1_ghc4x")
+avatar_texture = ExtResource("1_xlp5w")
+dialog_slides = Array[String](["Great minds think alike.", "I have a great mind. That's what I'm saying"])

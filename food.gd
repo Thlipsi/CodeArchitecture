@@ -12,6 +12,7 @@ var _mesh: Node3D
 func _ready():
 	GameEvents.connect("food_moused_over", _on_mouse_entered)
 	GameEvents.connect("food_moused_exit", _on_mouse_exited)
+	GameEvents.connect("food_clicked", _on_mouse_clicked)
 	for child in get_children():
 		if child.get_class() == "Node3D":
 			self.name = child.name
@@ -35,3 +36,9 @@ func _on_mouse_entered(food: Food):
 func _on_mouse_exited():
 	spotlight.visible = false
 	_spin = false
+
+
+func _on_mouse_clicked(food: Food):
+	if food == self:
+		self.queue_free()
+		self.get_parent().food_chosen(self)
