@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="RuntimeData" load_steps=2 format=3 uid="uid://dgs7spjbnm03p"]
+
+[ext_resource type="Script" path="res://runtime_state.gd" id="1_i3e13"]
+
+[resource]
+script = ExtResource("1_i3e13")
+current_gameplay_state = 1

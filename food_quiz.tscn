@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://j108u7gyo1d5"]
+[gd_scene load_steps=19 format=3 uid="uid://j108u7gyo1d5"]
 
 [ext_resource type="PackedScene" uid="uid://bh20snvpxxyhh" path="res://Assets/stallRed.glb" id="1_4p325"]
 [ext_resource type="Script" path="res://food_quiz.gd" id="1_mnswy"]
@@ -41,8 +41,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_g8fr2")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aab3h"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_5lipb"]
 _surfaces = [{
@@ -219,32 +217,26 @@ transform = Transform3D(0.819152, 0, 0.573577, 0, 1, 0, -0.573577, 0, 0.819152, 
 [node name="Body1" parent="AdventurerNPC" index="0"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_uiq3d")
-surface_material_override/0 = SubResource("StandardMaterial3D_aab3h")
 
 [node name="Head1" parent="AdventurerNPC" index="1"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_tvlqb")
-surface_material_override/0 = SubResource("StandardMaterial3D_aab3h")
 
 [node name="ArmLeft1" parent="AdventurerNPC" index="2"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_x5ku3")
-surface_material_override/0 = SubResource("StandardMaterial3D_aab3h")
 
 [node name="ArmRight1" parent="AdventurerNPC" index="3"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_dl2uh")
-surface_material_override/0 = SubResource("StandardMaterial3D_aab3h")
 
 [node name="LegLeft1" parent="AdventurerNPC" index="4"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_hytuh")
-surface_material_override/0 = SubResource("StandardMaterial3D_aab3h")
 
 [node name="LegRight1" parent="AdventurerNPC" index="5"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_27cjk")
-surface_material_override/0 = SubResource("StandardMaterial3D_aab3h")
 
 [node name="DialogTrigger" type="Area3D" parent="."]
 

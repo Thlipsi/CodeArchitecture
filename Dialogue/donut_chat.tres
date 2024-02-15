@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=3 format=3 uid="uid://ca5ltlkxqcju"]
+
+[ext_resource type="Script" path="res://dialogue.gd" id="1_3wyyj"]
+[ext_resource type="Texture2D" uid="uid://pq51tldrth84" path="res://Assets/face_woman.png" id="1_4u0cb"]
+
+[resource]
+script = ExtResource("1_3wyyj")
+avatar_texture = ExtResource("1_4u0cb")
+dialog_slides = Array[String](["Well hellooooo", "I made these donuts all by myself!", "They're terrrible!", "Except for one of them"])

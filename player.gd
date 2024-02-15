@@ -4,6 +4,8 @@ extends CharacterBody3D
 @export var _move_speed: float = 3
 @export var camera : Camera3D
 
+@export var _runtime_data: Resource
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -14,7 +16,8 @@ func _input(event) -> void:
 
 
 func _physics_process(delta):
-	movement()
+	if _runtime_data.current_gameplay_state == Enums.GameplayState.FREEWALK:
+		movement()
 
 
 func aim(event) -> void:

@@ -10,4 +10,4 @@ func _input(event):
 			GameEvents.emit_signal("food_moused_over", collided_area)
 	elif _is_mousing_over:
 		_is_mousing_over = false
-		GameEvents.emit_signal("food_moused_out")
+		GameEvents.emit_signal("food_moused_exit")
